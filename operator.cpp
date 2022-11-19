@@ -1,47 +1,36 @@
-#include <iostream>
-
+#include<bits/stdc++.h>
 using namespace std;
 
-int main()
-{
+bool findOperator(string ar[], int size, string inp) {
+    for(int i = 0; i < size; i++){
+        if(ar[i] == inp) {
+            return true;
+        }
+    }
+    return false;
+}
+int main() {
+    string arithmetic[] = {"+", "-", "", "/", "%", "++", "--"};
+    string relational[] = {"==", "!=", ">", "<", ">=", "<="};
+    string logical[] = {"&&", "||", "!"};
+    string bitwise[] = {"&", "|", "~", "^", "<<", ">>"};
+    string assignment[] = {"=", "+=", "-=", "=", "/=", "%=", "<<=", ">>=", "&=", "^=", "|="};
+    string inp;
     while(true){
-        char ch;
-        cin>>ch;
-        Lebel:
-        if (ch == '%' || ch=='/' || ch=='*' || ch== '+' || ch=='-'){
-            cout<<ch<<" "<<"This is an Arithmetic Operator"<<endl;
+        cin>>inp;
+        if(findOperator(arithmetic, 7, inp)){
+            cout<<inp<<" "<<"Arithmetic Operator"<<endl;
+        }else if(findOperator(relational, 6, inp)){
+            cout<<inp<<" "<<"Relational Operator"<<endl;
+        }else if(findOperator(logical, 3, inp)){
+            cout<<inp<<" "<<"Logical Operator"<<endl;
+        }else if(findOperator(bitwise, 6, inp)){
+            cout<<inp<<" "<<"Bitwise Operator"<<endl;
+        }else if(findOperator(assignment, 11, inp)){
+            cout<<inp<<" "<<"Assignment Operator"<<endl;
+        }else{
+            cout<<inp<<" "<<"Not an operator"<<endl;
         }
-        else if( ch =='<' || ch =='>' || ch =='=')
-            cout<<ch<<" "<<"This is a relational operator"<<endl;
-        else if(ch=='&' || ch=='|' || ch =='!'){
-            if(ch=='&'){
-                cin>>ch;
-                if(ch=='&')
-                    cout<<"&& "<<"This is Logical AND Operator"<<endl;
-                else{
-                    cout<<"& "<<"This is bitwise operator"<<endl;
-                    goto Lebel;
-                }
-            }else if(ch=='|'){
-                cin>>ch;
-                if(ch=='|')
-                    cout<<"|| "<<"This is Logical OR Operator"<<endl;
-                else{
-                    cout<<"| "<<"This is bitwise operator"<<endl;
-                    goto Lebel;
-                }
-            }else if(ch=='!'){
-                cin>>ch;
-                if(ch=='=')
-                    cout<<"!= "<<"This is Not Equal Operator"<<endl;
-                else{
-                    cout<<"! "<<"This is bitwise operator"<<endl;
-                    goto Lebel;
-                }
-            }
-        }
-        else
-            cout<<ch<<" "<<"This is not a operator"<<endl;
     }
     return 0;
 }
