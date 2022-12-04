@@ -1,8 +1,14 @@
+/*
+    Title : A program that remove left recursion from a given grammer 
+    Author: Md. Abid Hasan Roni Bokshi 
+    Date : 04-12-2022
+*/
+
 #include <stdio.h>
 
 int main(){
     int n;
-    int i,index = 3;
+    int i,index = 3, alpha=4;
     printf("Enter the number of Production Rules : ");
     scanf("%d", &n);
     char a, b, non_t, p[10][n];
@@ -17,15 +23,29 @@ int main(){
                 index++;
             if(p[i][index]!=0){
                 b = p[i][index + 1];
-                printf("without left recursion is:\n%c->%c%c\'", non_t,b,non_t);
-                printf("\n%c\'->%c%c\'|Epsilon", non_t, a, non_t);
-            }else{
+                index=index+2;
+                printf("without left recursion is:\n%c->%c", non_t, b);
+                while(p[i][index]!=0){
+                    b = p[i][index];
+                    printf("%c", b);
+                    index++;
+                }
+                printf("%c\'", non_t);
+
+                printf("\n%c\'->", non_t);
+                while(p[i][alpha] != '|'){
+                    printf("%c", p[i][alpha]);
+                    alpha++;
+                }
+                printf("%c\'|ε \n", non_t);
+            }
+            else
+            {
                 printf("can't reduce");
             }
         }else{
             printf("There is no left recursion\n");
         }
-        index = 3;
     }
     return 0;
 }
